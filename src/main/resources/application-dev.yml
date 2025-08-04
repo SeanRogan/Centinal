@@ -1,0 +1,46 @@
+spring:
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+      separator: ';'
+  application:
+    admin:
+      enabled: true
+  data:
+    rest:
+      base-path: /
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: centinal_test
+    password: postpass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20          # Higher for time-series workloads
+      minimum-idle: 5
+      idle-timeout: 300000           # 5 minutes
+      max-lifetime: 1200000          # 20 minutes
+      connection-timeout: 20000      # 20 seconds
+      leak-detection-threshold: 60000 # 1 minute
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 50             # Optimize batch inserts for time-series
+        order_inserts: true
+        order_updates: true
+    open-in-view: true
+#  kafka:
+#    admin:
+#    consumer:
+#    producer:
+#    streams:
+coinbase:
+  api:
+    key: ${COINBASE_API_KEY:}
+    secret: ${COINBASE_API_SECRET:}
+    passphrase: ${COINBASE_API_PASSPHRASE:}
