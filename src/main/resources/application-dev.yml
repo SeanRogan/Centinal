@@ -4,12 +4,6 @@ spring:
       mode: always
       continue-on-error: false
       separator: ';'
-  application:
-    admin:
-      enabled: true
-  data:
-    rest:
-      base-path: /
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: centinal_test
@@ -24,7 +18,8 @@ spring:
       leak-detection-threshold: 60000 # 1 minute
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
+    show-sql: true
     generate-ddl: true
     properties:
       hibernate:
@@ -39,8 +34,9 @@ spring:
 #    consumer:
 #    producer:
 #    streams:
-coinbase:
-  api:
-    key: ${COINBASE_API_KEY:}
-    secret: ${COINBASE_API_SECRET:}
-    passphrase: ${COINBASE_API_PASSPHRASE:}
+# Market Data Configuration
+market:
+  data:
+    uri: 'wss://ws-feed.exchange.coinbase.com'
+    symbols: BTC-USD,ETH-USD,ADA-USD,SOL-USD
+
