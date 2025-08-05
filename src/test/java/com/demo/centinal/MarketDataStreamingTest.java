@@ -1,5 +1,7 @@
 package com.demo.centinal;
-
+import java.util.ArrayList; 
+import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -66,10 +68,10 @@ class MarketDataStreamingTest {
             
             long maxLag = Collections.max(lagMeasurements);
             
-            logger.info("Streaming efficiency test results:");
-            logger.info("Average lag: {} ms", avgLag);
-            logger.info("Maximum lag: {} ms", maxLag);
-            logger.info("Total samples: {}", lagMeasurements.size());
+            // logger.info("Streaming efficiency test results:");
+            // logger.info("Average lag: {} ms", avgLag);
+            // logger.info("Maximum lag: {} ms", maxLag);
+            // logger.info("Total samples: {}", lagMeasurements.size());
         }
 
         private long getLatestKafkaMessageTimestamp() {
