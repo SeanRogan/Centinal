@@ -1,0 +1,48 @@
+# Test-specific configuration for TimescaleDB via Testcontainers
+# This will be overridden by Testcontainers at runtime
+
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:15://localhost/testdb
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  test:
+    database:
+      replace: none
+  task:
+    execution:
+      pool:
+        core-size: 2
+        max-size: 4
+        queue-capacity: 10
+
+# Test-specific market data configuration
+market:
+  data:
+    symbols: BTC-USD,ETH-USD
+
+# Test-specific Coinbase API configuration (empty for tests)
+coinbase:
+  api:
+    key: ""
+    secret: ""
+    passphrase: ""
+
+# Logging configuration for tests
+logging:
+  level:
+    com.demo.centinal: DEBUG
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" 
