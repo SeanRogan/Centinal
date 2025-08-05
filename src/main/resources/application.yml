@@ -1,6 +1,31 @@
 spring:
   application:
     name: centinal
+    admin:
+      enabled: true
+  data:
+    rest:
+      base-path: /
   profiles:
     active: dev
+
+coinbase:
+  api:
+    key: ${COINBASE_API_KEY:}
+    secret: ${COINBASE_API_SECRET:}
+    passphrase: ${COINBASE_API_PASSPHRASE:}
+
+# Server Configuration
+server:
+  port: 8080
+
+# Management endpoints for monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
 

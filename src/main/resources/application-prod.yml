@@ -1,7 +1,42 @@
 spring:
-  
-coinbase:
-  api:
-    key: ${COINBASE_API_KEY}
-    secret: ${COINBASE_API_SECRET}
-    passphrase: ${COINBASE_API_PASSPHRASE}
+  sql:
+    init:
+      mode: never
+      continue-on-error: false
+      separator: ';'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: centinal
+    password: password_here #replace with password manager
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 60          # Higher for time-series workloads
+      minimum-idle: 5
+      idle-timeout: 300000           # 5 minutes
+      max-lifetime: 1200000          # 20 minutes
+      connection-timeout: 20000      # 20 seconds
+      leak-detection-threshold: 60000 # 1 minute
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 50             # Optimize batch inserts for time-series
+        order_inserts: true
+        order_updates: true
+    open-in-view: true
+#  kafka:
+#    admin:
+#    consumer:
+#    producer:
+#    streams:
+# Market Data Configuration
+market:
+  data:
+    enabled: true
+    symbols: BTC-USD,ETH-USD,ADA-USD,SOL-USD
+
