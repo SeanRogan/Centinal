@@ -6,7 +6,6 @@ A Spring Boot application that streams real-time market data from Coinbase to Ti
 
 - Real-time market data streaming from Coinbase WebSocket API
 - TimescaleDB integration for time-series data storage
-- REST API endpoints for querying market data
 - Health monitoring and metrics
 - Configurable symbol subscriptions
 - Error handling and logging
@@ -76,36 +75,7 @@ Configure which symbols to stream in `application.yml`:
 market:
   data:
     enabled: true
-    symbols: BTC-USD,ETH-USD,ADA-USD,SOL-USD,DOGE-USD
-```
-
-### Coinbase API (Optional)
-
-For authenticated access, set environment variables:
-
-```bash
-export COINBASE_API_KEY=your_api_key
-export COINBASE_API_SECRET=your_api_secret
-export COINBASE_API_PASSPHRASE=your_passphrase
-```
-
-## API Endpoints
-
-### Health Check
-```
-GET /api/market-data/health
-```
-
-### Latest Market Data
-```
-GET /api/market-data/latest/{symbol}
-```
-
-Example: `GET /api/market-data/latest/BTC-USD`
-
-### Market Data Range
-```
-GET /api/market-data/{symbol}/range?startTime=2024-01-01T00:00:00Z&endTime=2024-01-01T23:59:59Z
+    symbols: BTC-USD,ETH-USD,ADA-USD,SOL-USD
 ```
 
 ### Actuator Endpoints
@@ -140,7 +110,6 @@ The application creates a `market_data` table with the following structure:
 1. **CoinbaseWebsocketClient**: Handles WebSocket connection to Coinbase
 2. **MarketDataStreamingService**: Processes incoming messages and persists to database
 3. **MarketDataRepository**: JPA repository for database operations
-4. **MarketDataController**: REST API endpoints for querying data
 
 ### Data Flow
 
@@ -149,7 +118,6 @@ The application creates a `market_data` table with the following structure:
 3. Receives real-time market data messages
 4. Processes and validates the data
 5. Persists to TimescaleDB with proper indexing
-6. Provides REST API access to the stored data
 
 ## Monitoring
 
