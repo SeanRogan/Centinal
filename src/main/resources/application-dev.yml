@@ -29,11 +29,17 @@ spring:
         order_inserts: true
         order_updates: true
     open-in-view: true
-#  kafka:
-#    admin:
-#    consumer:
-#    producer:
-#    streams:
+  kafka:
+    consumer:
+      group-id: market-data-consumer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    producer:
+      acks: 1
+      retries: 3
+    listener:
+      ack-mode: manual
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
 # Market Data Configuration
 market:
   data:
