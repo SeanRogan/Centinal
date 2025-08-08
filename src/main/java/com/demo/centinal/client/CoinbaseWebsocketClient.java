@@ -84,13 +84,17 @@ public class CoinbaseWebsocketClient implements ExchangeDataWebsocketClient {
             }
             @Override
             public void onClose(int code, String reason, boolean remote) {
+                try {
                 webSocketClient.close(code, reason);
                 connected = false;
+                } catch (Exception e) {
+                    log.error("Failed to close websocket client: {}", reason, e);
+                }
             }
             @Override
             public void onError(Exception ex) {
                 connected = false;
-                // TODO: Add error logging
+                log.error("There was an error with the Websocket:", ex);
             }
         };
         webSocketClient.connect();
