@@ -1,8 +1,11 @@
-# Centinal - Market Data Streaming Service
+# THIS REPO IS DEPRECATED
+# FOR THE UPDATED VERSION SEE: https://github.com/seanrogan/centinel
+
+## Centinal - Market Data Streaming Service
 
 A Spring Boot application that streams real-time market data from Coinbase to TimescaleDB using WebSocket connections.
 
-## Features
+### Features
 
 - Real-time market data streaming from Coinbase WebSocket API
 - TimescaleDB integration for time-series data storage
@@ -10,16 +13,16 @@ A Spring Boot application that streams real-time market data from Coinbase to Ti
 - Configurable symbol subscriptions
 - Error handling and logging
 
-## Prerequisites
+### Prerequisites
 
 - Java 21
 - Maven 3.6+
 - PostgreSQL with TimescaleDB extension
 - Docker (optional, for containerized deployment)
 
-## Quick Start
+### Quick Start
 
-### 1. Database Setup
+#### 1. Database Setup
 
 First, ensure you have PostgreSQL with TimescaleDB extension installed:
 
@@ -37,7 +40,7 @@ CREATE EXTENSION IF NOT EXISTS timescaledb;
 -- The application will create the table with proper time-series optimization
 ```
 
-### 2. Configuration
+#### 2. Configuration
 
 Update the database connection in `src/main/resources/application.yml`:
 
@@ -49,7 +52,7 @@ spring:
     password: your_password
 ```
 
-### 3. Run the Application
+#### 3. Run the Application
 
 ```bash
 # Build the application
@@ -65,9 +68,9 @@ The application will automatically:
 - Create the necessary database tables
 - Begin processing and storing market data
 
-## Configuration
+### Configuration
 
-### Market Data Symbols
+#### Market Data Symbols
 
 Configure which symbols to stream in `application.yml`:
 
